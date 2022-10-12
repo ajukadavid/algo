@@ -81,5 +81,5 @@
 // console.log(howSum(700, [2, 3, 9]))
 
 const bestSum = (targetSum, numbers) => {
-  
+  if(targetSum === 0) return []
 }
