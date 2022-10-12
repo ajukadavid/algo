@@ -62,17 +62,20 @@
 //howSum: similar to canSum but r eturns the array possible number of combinations pr return null if no combination in array can match targetsum
 
 const howSum = (targetSum, numbers, memo = {}) => {
+  if (targetSum in memo) return memo[targetSum]
   if (targetSum === 0) return []
   if (targetSum < 0) return null
 
   for (let num of numbers) {
     const remainder = targetSum - num;
-    const remainderResult = howSum(remainder, numbers)
+    const remainderResult = howSum(remainder, numbers, memo)
     if (remainderResult !== null) {
-      return [...remainderResult, num]
+      memo[targetSum] = [...remainderResult, num]
+      return memo[targetSum]
     }
   }
+  memo[targetSum] = null
   return null
 }
 
-console.log(howSum(7, [2, 3]))
+console.log(howSum(700, [2, 3, 9]))
