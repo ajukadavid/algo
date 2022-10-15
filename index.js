@@ -80,7 +80,8 @@
 
 // console.log(howSum(700, [2, 3, 9]))
 
-const bestSum = (targetSum, numbers) => {
+const bestSum = (targetSum, numbers, memo={}) => {
+  if (targetSum in memo) return memo[targetSum]
   if (targetSum === 0) return [];
   if(targetSum  < 0) return null;
 
@@ -88,7 +89,7 @@ const bestSum = (targetSum, numbers) => {
   
   for(let num of numbers){
     const remainder = targetSum - num
-   const remainderCombination = bestSum(remainder,numbers);
+   const remainderCombination = bestSum(remainder,numbers, memo);
     if(remainderCombination !== null){
       const combination = [...remainderCombination, num]
       //if the combination is shorter than the current "shortest", update it
@@ -98,7 +99,8 @@ const bestSum = (targetSum, numbers) => {
     }
   }
 
+  memo[targetSum] = shortestCombination
   return shortestCombination
 }
 
-console.log(bestSum(2, [5, 3, 4, 7]))
+console.log(bestSum(900, [50, 3, 4, 7]))
