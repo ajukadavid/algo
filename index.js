@@ -59,7 +59,7 @@
 
 // console.log(canSum(7, [3, 4]))
 
-//howSum: similar to canSum but r eturns the array possible number of combinations pr return null if no combination in array can match targetsum
+//howSum: similar to canSum but returns the array possible number of combinations or return null if no combination in array can match targetsum
 
 // const howSum = (targetSum, numbers, memo = {}) => {
 //   if (targetSum in memo) return memo[targetSum]
