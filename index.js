@@ -81,5 +81,12 @@
 // console.log(howSum(700, [2, 3, 9]))
 
 const bestSum = (targetSum, numbers) => {
-  if (targetSum === 0) return []
+  if (targetSum === 0) return [];
+  if(targetSum  < 0) return null;
+
+  
+  for(let num in numbers){
+    const remainder = targetSum - num
+   const remainderCombination = bestSum(remainder, numbers)
+  }
 }
