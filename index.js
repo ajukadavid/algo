@@ -84,9 +84,19 @@ const bestSum = (targetSum, numbers) => {
   if (targetSum === 0) return [];
   if(targetSum  < 0) return null;
 
+  let shortestCombination = null
   
-  for(let num in numbers){
+  for(let num of numbers){
     const remainder = targetSum - num
-   const remainderCombination = bestSum(remainder, numbers)
+   const remainderCombination = bestSum(remainder,numbers);
+    if(remainderCombination !== null){
+      const combination = [...remainderCombination, num]
+      //if the combination is shorter than the current "shortest", update it
+      if(shortestCombination === null || combination.length < shortestCombination.length){
+        shortestCombination = combination
+      }
+    }
   }
+
+  return shortestCombination
 }
