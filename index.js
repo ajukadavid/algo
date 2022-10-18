@@ -108,22 +108,35 @@
 
 // console.log(bestSum(900, [50, 3, 4, 7]))
 
-const canConstruct = (target, wordBank, memo = {}) => {
-  if (target in memo) return memo[target]
-  if(target === '') return true
+// const canConstruct = (target, wordBank, memo = {}) => {
+//   if (target in memo) return memo[target]
+//   if(target === '') return true
+
+//   for(let word of wordBank) {
+//     if(target.indexOf(word) === 0){
+//       const suffix = target.slice(word.length)
+//      if(canConstruct(suffix, wordBank, memo) === true){
+//        memo[target] = true
+//        return true
+//      }
+//     }
+//   }
+//   memo[target] = false
+//   return false
+// }
+
+// console.log(canConstruct("abcdef", ['ab', 'abc', 'cd', 'def', 'abcd']))
+// console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]))
+
+const countConstruct = (target, wordBank) => {
+  if(target = '') return 1;
+
+  let totalCount = 0;
 
   for(let word of wordBank) {
-    if(target.indexOf(word) === 0){
-      const suffix = target.slice(word.length)
-     if(canConstruct(suffix, wordBank, memo) === true){
-       memo[target] = true
-       return true
-     }
+    if target.indexOf(word === 0) { //check if word is a prefix
+    const numWaysForRest =   countConstruct(target.slice(word.length), wordBank) //pass in everything else after the prefix
+      totalCount +=
     }
   }
-  memo[target] = false
-  return false
 }
-
-console.log(canConstruct("abcdef", ['ab', 'abc', 'cd', 'def', 'abcd']))
-console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]))
