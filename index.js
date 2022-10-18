@@ -38,7 +38,7 @@
 
 // console.log(factorial(3))
 
-//CanSum: check if combination of numbers in array can supup to target number without remainder
+//CanSum: check if combination of numbers in array can supup to target number without remainder --> Descision problem
 
 // const canSum = (targetSum, numbers, memo = {}) => {
 //   if(targetSum in memo) return memo[targetSum]
@@ -59,7 +59,8 @@
 
 // console.log(canSum(7, [3, 4]))
 
-//howSum: similar to canSum but returns the array possible number of combinations or return null if no combination in array can match targetsum
+
+//howSum: similar to canSum but returns the array possible number of combinations or return null if no combination in array can match targetsum --> Combinatoric problem
 
 // const howSum = (targetSum, numbers, memo = {}) => {
 //   if (targetSum in memo) return memo[targetSum]
@@ -80,27 +81,49 @@
 
 // console.log(howSum(700, [2, 3, 9]))
 
-const bestSum = (targetSum, numbers, memo={}) => {
-  if (targetSum in memo) return memo[targetSum]
-  if (targetSum === 0) return [];
-  if(targetSum  < 0) return null;
+//best sum: optimization problem, check the best possible combination of numbers to genarate the targetSum
 
-  let shortestCombination = null
+// const bestSum = (targetSum, numbers, memo={}) => {
+//   if (targetSum in memo) return memo[targetSum]
+//   if (targetSum === 0) return [];
+//   if(targetSum  < 0) return null;
+
+//   let shortestCombination = null
   
-  for(let num of numbers){
-    const remainder = targetSum - num
-   const remainderCombination = bestSum(remainder,numbers, memo);
-    if(remainderCombination !== null){
-      const combination = [...remainderCombination, num]
-      //if the combination is shorter than the current "shortest", update it
-      if(shortestCombination === null || combination.length < shortestCombination.length){
-        shortestCombination = combination
-      }
+//   for(let num of numbers){
+//     const remainder = targetSum - num
+//    const remainderCombination = bestSum(remainder,numbers, memo);
+//     if(remainderCombination !== null){
+//       const combination = [...remainderCombination, num]
+//       //if the combination is shorter than the current "shortest", update it
+//       if(shortestCombination === null || combination.length < shortestCombination.length){
+//         shortestCombination = combination
+//       }
+//     }
+//   }
+
+//   memo[targetSum] = shortestCombination
+//   return shortestCombination
+// }
+
+// console.log(bestSum(900, [50, 3, 4, 7]))
+
+const canConstruct = (target, wordBank, memo = {}) => {
+  if (target in memo) return memo[target]
+  if(target === '') return true
+
+  for(let word of wordBank) {
+    if(target.indexOf(word) === 0){
+      const suffix = target.slice(word.length)
+     if(canConstruct(suffix, wordBank, memo) === true){
+       memo[target] = true
+       return true
+     }
     }
   }
-
-  memo[targetSum] = shortestCombination
-  return shortestCombination
+  memo[target] = false
+  return false
 }
 
-console.log(bestSum(900, [50, 3, 4, 7]))
+console.log(canConstruct("abcdef", ['ab', 'abc', 'cd', 'def', 'abcd']))
+console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]))
