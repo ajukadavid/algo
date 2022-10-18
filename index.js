@@ -129,14 +129,17 @@
 // console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee", "eeee", "eeeee", "eeeeee"]))
 
 const countConstruct = (target, wordBank) => {
-  if(target = '') return 1;
+  if(target === '') return 1;
 
   let totalCount = 0;
 
   for(let word of wordBank) {
-    if target.indexOf(word === 0) { //check if word is a prefix
+    if (target.indexOf(word) === 0) { //check if prefix
     const numWaysForRest =   countConstruct(target.slice(word.length), wordBank) //pass in everything else after the prefix
       totalCount += numWaysForRest
     }
   }
+  return totalCount
 }
+
+console.log(countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
