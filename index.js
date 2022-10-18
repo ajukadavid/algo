@@ -136,7 +136,7 @@ const countConstruct = (target, wordBank) => {
   for(let word of wordBank) {
     if target.indexOf(word === 0) { //check if word is a prefix
     const numWaysForRest =   countConstruct(target.slice(word.length), wordBank) //pass in everything else after the prefix
-      totalCount +=
+      totalCount += numWaysForRest
     }
   }
 }
